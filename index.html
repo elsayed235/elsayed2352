@@ -349,11 +349,11 @@
     .exp-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(40px, 6vw, 100px); align-items: start; }
     .exp-head { position: sticky; top: calc(var(--nav-h) + 40px); }
     .exp-head .text-link { display: inline-block; margin-top: 28px; }
-    .timeline { position: relative; display: grid; gap: 22px; padding-left: 36px; }
-    .timeline::before, .timeline-fill { content: ""; position: absolute; left: 7px; top: 8px; bottom: 8px; width: 2px; border-radius: 2px; background: var(--line); }
+    .timeline { --gut: 36px; --rail: 8px; --dot: 16px; position: relative; display: grid; gap: 22px; padding-left: var(--gut); }
+    .timeline::before, .timeline-fill { content: ""; position: absolute; left: calc(var(--rail) - 1px); top: 8px; bottom: 8px; width: 2px; border-radius: 2px; background: var(--line); }
     .timeline-fill { background: linear-gradient(var(--signal), var(--violet)); transform-origin: top; transform: scaleY(var(--tl, 0)); }
     .job { position: relative; padding: 30px; border-radius: 26px; background: var(--surface); border: 1px solid var(--line); }
-    .job::before { content: ""; position: absolute; left: -36px; top: 36px; width: 16px; height: 16px; border-radius: 50%; background: var(--bg); border: 2px solid var(--signal-hi); }
+    .job::before { content: ""; position: absolute; left: calc(var(--rail) - var(--gut) - var(--dot) / 2); top: 36px; width: var(--dot); height: var(--dot); border-radius: 50%; background: var(--bg); border: 2px solid var(--signal-hi); z-index: 1; }
     .job-when { color: var(--muted); font-size: 14.5px; }
     .job h3 { margin-top: 6px; font: 700 26px/1.15 var(--f-display); letter-spacing: -.03em; }
     .job-where { color: var(--ice); margin-top: 2px; font-weight: 500; }
@@ -735,8 +735,7 @@
       .logo-name { font-size: 15px; }
       .job { padding: 24px 20px 22px; }
       .job-top { flex-direction: column-reverse; gap: 12px; }
-      .timeline { padding-left: 26px; }
-      .job::before { left: -26px; }
+      .timeline { --gut: 28px; }
       .portrait { max-width: none; aspect-ratio: 4 / 5; }
       .portrait img { object-position: 50% 30%; }
       .cs-hero { height: 290px; }
