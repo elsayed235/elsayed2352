@@ -628,7 +628,8 @@ button { font: inherit; color: inherit; }
   .device-caption button { color: var(--on-blue); }
   .work { padding-top: clamp(72px, 10vw, 110px); }
   .exp-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; }
-  .exp-head, .portrait { position: static; }
+  .exp-head { position: static; }
+  .portrait { position: relative; top: auto; }
   .portrait { max-width: 420px; }
   .stack-grid { grid-template-columns: 1fr; }
   .stack-list { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: none; }
