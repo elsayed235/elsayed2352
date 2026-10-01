@@ -29,6 +29,8 @@
   <meta name="twitter:image" content="https://elsayed235.github.io/assets/og-image.jpg">
 
   <link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="assets/favicon-192.png" type="image/png" sizes="192x192">
+  <link rel="preload" href="assets/avatar.jpg" as="image">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preload" href="assets/fonts/sora.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
@@ -637,6 +639,113 @@
     :root[data-theme="light"] .form-card input, :root[data-theme="light"] .form-card textarea { background: #F7F8FC; }
     :root[data-theme="light"] .tag { background: #fff; }
 
+
+    /* ---------- Avatar logo ---------- */
+    .logo { display: inline-flex; align-items: center; gap: 11px; font: 600 16px/1 var(--f-display); letter-spacing: -.02em; }
+    .av { position: relative; display: inline-block; flex: none; width: 38px; height: 38px; border-radius: 50%; isolation: isolate; }
+    .av::before { content: ""; position: absolute; inset: -2px; z-index: -1; border-radius: 50%; background: conic-gradient(from 0deg, #3D5BFF, #7A5CFF, #2EE6B8, #3D5BFF); animation: ring 7s linear infinite; }
+    .av img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 2px solid var(--bg); background: var(--bg-raise); }
+    @keyframes ring { to { transform: rotate(1turn); } }
+    .logo:hover .av img { transform: scale(1.04); }
+    .av img { transition: transform .5s var(--ease); }
+    .logo--lg .av { width: 52px; height: 52px; }
+    .logo--lg { font-size: 18px; }
+    .nav.is-scrolled .logo .av { width: 34px; height: 34px; }
+    .nav .av { transition: width .5s var(--ease), height .5s var(--ease); }
+    .nav.is-scrolled .nav-inner { padding-left: 12px; }
+
+    /* Intro with the photo */
+    .intro-av { width: 112px; height: 112px; opacity: 0; transform: scale(.7); filter: blur(8px); transition: opacity .8s var(--ease), transform 1s var(--ease), filter .8s var(--ease); }
+    .intro-av .av { width: 100%; height: 100%; }
+    .intro-av .av::before { inset: -3px; }
+    .intro-av .av img { border-width: 3px; }
+    .intro-name { font: 600 20px/1 var(--f-display); letter-spacing: -.02em; opacity: 0; transform: translateY(10px); transition: opacity .8s var(--ease) .15s, transform .8s var(--ease) .15s; }
+    .intro.run .intro-av, .intro.run .intro-name { opacity: 1; transform: none; filter: none; }
+    .intro.done .intro-av { transform: scale(1.15); opacity: 0; transition-delay: 0s; }
+    .intro.done .intro-name { opacity: 0; transform: translateY(-10px); transition-delay: 0s; }
+
+    /* ---------- Store links ---------- */
+    .story-actions { margin-top: 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+    .story-text .story-actions .btn { margin-top: 0; }
+    .store-pill { display: inline-flex; align-items: center; gap: 6px; padding: 11px 16px; border-radius: 999px; font: 600 14px/1 var(--f-body); border: 1px solid var(--line); background: var(--surface); color: var(--text); transition: border-color .3s, background-color .3s, transform .5s var(--ease); }
+    .store-pill:hover { border-color: var(--glow); background: color-mix(in srgb, var(--glow) 14%, transparent); }
+    .store-pill svg, .store-btn svg { transition: transform .4s var(--ease); }
+    .store-pill:hover svg, .store-btn:hover svg { transform: translate(2px, -2px); }
+    .cs-stores { display: grid; gap: 14px; }
+    .store-group p { color: var(--muted); font-size: 14px; margin-bottom: 8px; }
+    .store-row { display: flex; flex-wrap: wrap; gap: 10px; }
+    .store-btn { flex: 1 1 180px; display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 13px 18px; border-radius: 16px; background: var(--text); color: var(--bg); transition: transform .5s var(--ease), box-shadow .4s; }
+    .store-btn span { display: grid; font: 600 17px/1.15 var(--f-display); letter-spacing: -.02em; }
+    .store-btn small { font: 500 12px/1.3 var(--f-body); opacity: .65; letter-spacing: 0; }
+    .store-btn:hover { transform: translateY(-2px); box-shadow: 0 16px 34px -16px var(--c, rgba(61,91,255,.8)); }
+
+    /* ---------- Experience, richer cards ---------- */
+    .job { padding: 30px 30px 26px; }
+    .job-top { display: flex; align-items: start; justify-content: space-between; gap: 16px; }
+    .job h3 { margin-top: 0; font-size: clamp(22px, 2.4vw, 28px); }
+    .job-when { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 8px 14px; font-size: 14px; }
+    .job-when span + span { padding-left: 14px; border-left: 1px solid var(--line); }
+    .job-tags { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 7px; }
+    .job-tags .tag { font-size: 12.5px; padding: 5px 11px; color: var(--muted); }
+    .live { flex: none; display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 600; color: #2EE6B8; background: rgba(46,230,184,.1); border: 1px solid rgba(46,230,184,.25); }
+    .live::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; animation: pulse-t 1.6s infinite; }
+    :root[data-theme="light"] .live { color: #0E8C6F; background: rgba(14,140,111,.08); border-color: rgba(14,140,111,.2); }
+    .job.is-current { background: linear-gradient(160deg, color-mix(in srgb, var(--signal) 12%, var(--surface)), var(--surface) 55%); border-color: color-mix(in srgb, var(--signal-hi) 35%, var(--line)); }
+    .job.is-current::before { background: var(--signal-hi); box-shadow: 0 0 0 6px color-mix(in srgb, var(--signal-hi) 25%, transparent); }
+    .job ul { margin-top: 14px; }
+    .timeline { gap: 18px; }
+
+    /* ---------- New phone screens ---------- */
+    .s-wei { background: #150B04; color: #FFEDE0; }
+    .online { display: flex; justify-content: space-between; align-items: center; padding: 11px 12px; border-radius: 14px; background: rgba(255,255,255,.05); }
+    .tog { width: 36px; height: 21px; border-radius: 999px; background: #FF6B1A; position: relative; }
+    .tog::after { content: ""; position: absolute; top: 3px; right: 3px; width: 15px; height: 15px; border-radius: 50%; background: #fff; }
+    .jobcard { padding: 12px; border-radius: 16px; background: linear-gradient(150deg, #3A1A06, #1E0E04); border: 1px solid rgba(255,107,26,.3); display: grid; gap: 7px; }
+    .jrow { display: flex; justify-content: space-between; opacity: .9; }
+    .jrow b { color: #FF9A5C; }
+    .jobcard .ride-btn { background: #FF6B1A; color: #fff; }
+    .s-wei.is-active .jobcard { animation: up .8s var(--ease) .1s forwards, glowpulse 2.4s ease-in-out 1s infinite; }
+    @keyframes glowpulse { 50% { box-shadow: 0 0 0 4px rgba(255,107,26,.18); } }
+    .wk b { display: block; font: 700 20px/1.1 var(--f-display); letter-spacing: -.03em; }
+    .s-wei .bars { height: 70px; }
+    .s-wei .bars i { background: linear-gradient(#FFB07A, #FF6B1A); }
+    .s-wei.is-active .bars i { animation: rise 1s var(--ease) .5s forwards; }
+    .s-waf { background: #10171A; color: #EEE7D8; }
+    .s-waf .track { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06); gap: 11px; }
+    .s-waf .tstep i { border-color: rgba(201,182,138,.35); background: transparent; }
+    .s-waf .tstep.done i { border-color: #C9B68A; background: #C9B68A; }
+    .s-waf .tstep.now i { border-color: #C9B68A; }
+    .s-waf.is-active .tstep.now i { animation: pulse-w 1.6s infinite; }
+    @keyframes pulse-w { 0% { box-shadow: 0 0 0 0 rgba(201,182,138,.5); } 100% { box-shadow: 0 0 0 9px rgba(201,182,138,0); } }
+    .docs { padding: 12px; border-radius: 14px; background: rgba(201,182,138,.1); display: grid; gap: 6px; }
+    .s-waf .bar { background: rgba(255,255,255,.08); }
+    .s-waf .bar::after { background: #C9B68A; }
+    .s-waf.is-active .bar::after { animation: grow60 1.8s var(--ease) .5s forwards; }
+    @keyframes grow60 { to { width: 60%; } }
+    .wallet { display: flex; justify-content: space-between; padding: 10px 12px; border-radius: 12px; background: #1C0A12; color: #fff; }
+    .wallet b { color: #FF8FB4; }
+    .s-store .stg { gap: 8px; }
+    .s-store .prod i { height: 52px; }
+
+    @media (max-width: 680px) {
+      .story-text .story-tags { display: none; }
+      .story-actions { justify-content: center; margin-top: 16px; }
+      .story-actions .btn { --pad: 12px 18px; font-size: 14px; }
+      .store-pill { padding: 10px 14px; font-size: 13.5px; }
+      .story-texts { min-height: 280px; }
+      .logo-name { font-size: 15px; }
+      .job { padding: 24px 20px 22px; }
+      .job-top { flex-direction: column-reverse; gap: 12px; }
+      .timeline { padding-left: 26px; }
+      .job::before { left: -26px; }
+      .timeline::before, .timeline-fill { left: 2px; }
+      .portrait { max-width: none; aspect-ratio: 4 / 5; }
+      .portrait img { object-position: 50% 30%; }
+      .cs-hero { height: 290px; }
+      .store-btn { flex-basis: 140px; }
+    }
+    @media (max-width: 380px) { .nav .logo-name { display: none; } }
+
     @media (max-width: 1000px) { .callouts { display: none; } }
     @media (max-width: 680px) {
       .story-grid .device { order: -1; }
@@ -653,14 +762,14 @@
   <noscript><style>.intro { display: none; }</style></noscript>
 </head>
 <body>
-  <div class="intro" id="intro" aria-hidden="true"><div class="intro-logo"><span>E</span><span>A</span></div><i class="intro-bar"></i></div>
+  <div class="intro" id="intro" aria-hidden="true"><div class="intro-av"><span class="av"><img src="assets/avatar.jpg" alt="" width="160" height="160"></span></div><p class="intro-name">Elsayed Abdelmoneem</p><i class="intro-bar"></i></div>
   <div class="grain" aria-hidden="true"></div>
   <a class="skip" href="#main">Skip to content</a>
   <div class="progress" id="progress" aria-hidden="true"></div>
 
   <header class="nav" id="nav">
     <div class="wrap nav-inner">
-      <a class="logo" href="#home" aria-label="Elsayed Abdelmoneem, back to top">EA</a>
+      <a class="logo" href="#home" aria-label="Elsayed Abdelmoneem, back to top"><span class="av"><img src="assets/avatar.jpg" alt="" width="80" height="80" decoding="async"></span><span class="logo-name">Elsayed</span></a>
       <nav class="nav-links" aria-label="Primary">
         <a href="#work">Work</a>
         <a href="#experience">Experience</a>
@@ -732,7 +841,7 @@
       <div class="wrap work-head section" style="padding-bottom:40px">
         <header class="section-head reveal">
           <h2>Apps I've built and shipped</h2>
-          <p>Six products across real estate, mobility, delivery, city services and commerce. Keep scrolling to run each one, or open the full breakdown.</p>
+          <p>Six products across real estate, ride-hailing, city services, logistics, family services and e-commerce. Keep scrolling to run each one, then open it in the store.</p>
         </header>
       </div>
       <div class="story" id="story">
@@ -757,7 +866,7 @@
       <div class="wrap specs-grid">
         <div class="spec"><b data-count="100" data-suffix="K+">100K+</b><span>downloads on Sakan, the real-estate app</span></div>
         <div class="spec"><b data-count="4" data-suffix="+">4+</b><span>years shipping iOS and Android apps</span></div>
-        <div class="spec"><b data-count="6">6</b><span>products across five industries</span></div>
+        <div class="spec"><b data-count="6">6</b><span>products shipped, five of them live on the stores</span></div>
       </div>
     </section>
 
@@ -858,7 +967,7 @@
   <footer class="footer">
     <div class="wrap footer-grid">
       <div class="footer-brand">
-        <a class="logo" href="#home" aria-label="Back to top">EA</a>
+        <a class="logo logo--lg" href="#home" aria-label="Back to top"><span class="av"><img src="assets/avatar.jpg" alt="" width="80" height="80" decoding="async"></span><span class="logo-name">Elsayed Abdelmoneem</span></a>
         <p>Elsayed Abdelmoneem, mobile team lead. Thanks for stopping by.</p>
       </div>
       <nav aria-label="Site"><h3>Site</h3><ul>
@@ -908,86 +1017,130 @@
     function goTo(y) { if (lenis) lenis.scrollTo(y, { duration: 1.5 }); else window.scrollTo({ top: y, behavior: reduce ? "auto" : "smooth" }); }
 
     /* ============================================================
-       CONTENT. Sakan is real; the other five names, summaries and
-       bullets are placeholders. Copy the real ones over from js/data.js.
+       CONTENT, taken from the CV. Store links open the app's page
+       on Google Play or the App Store (on a phone, the store app).
        ============================================================ */
+    var GP = "Google Play", AS = "App Store";
     var APPS = [
-      { id: "sakan", name: "Sakan", cat: "Real estate", color: "#3D5BFF", screen: "sakan",
-        summary: "A real-estate platform for browsing, saving and enquiring about homes. It has passed 100K downloads.",
-        role: "Mobile lead", platforms: "iOS and Android", stack: ["Flutter", "Laravel", "Firebase"],
-        did: ["Took the scope from planning through to store release", "Set the architecture and state-management approach", "Reviewed every merge to keep quality steady as the user base grew"] },
-      { id: "ride", name: "Ride-hailing app", cat: "Mobility", color: "#33D69F", screen: "ride",
-        summary: "Book a ride, follow the driver on a live map and pay in the app.",
-        role: "Mobile developer", platforms: "iOS and Android", stack: ["Flutter", "Firebase"],
-        did: ["Built the live map and driver-tracking flow", "Handled trip states from request to drop-off", "Shipped rider and driver builds to both stores"] },
-      { id: "delivery", name: "Delivery app", cat: "Delivery", color: "#FF6B1A", screen: "delivery",
-        summary: "Order from local stores and track the order from kitchen to door.",
-        role: "Mobile developer", platforms: "iOS and Android", stack: ["Flutter", "Laravel"],
-        did: ["Built ordering, checkout and live order tracking", "Connected the app to a Laravel back end", "Worked with the client team on release planning"] },
-      { id: "city", name: "City services", cat: "City services", color: "#2EE6B8", screen: "city",
-        summary: "One app for residents to request city services and follow each request.",
-        role: "Mobile developer", platforms: "iOS and Android", stack: ["Swift", "Kotlin", "Firebase"],
-        did: ["Built service requests and status tracking", "Native Swift and Kotlin modules where needed", "Push notifications for every status change"] },
-      { id: "store", name: "Online store", cat: "Commerce", color: "#E8457C", screen: "store",
-        summary: "A shopping app with a catalogue, cart and checkout.",
-        role: "Mobile developer", platforms: "iOS and Android", stack: ["Flutter", "Laravel"],
-        did: ["Built the catalogue, cart and checkout", "Promotions and banners managed from the back end", "Kept the app fast on lower-end Android phones"] },
-      { id: "seller", name: "Seller dashboard", cat: "Commerce", color: "#8D6BFF", screen: "seller",
-        summary: "A companion app for sellers to watch sales and manage orders.",
-        role: "Mobile developer", platforms: "iOS and Android", stack: ["Flutter", "Firebase Functions"],
-        did: ["Sales overview with daily charts", "Order management with real-time updates", "Back-end logic in Firebase Functions"] }
+      { id: "sakan", name: "Sakan", cat: "Real estate", color: "#3D5BFF", screen: "sakan", stat: ["Downloads", "100K+"],
+        summary: "Property search with advanced filters, saved and compare lists, price-change alerts, maps and direct buyer-to-seller contact. Built to stay fast on large listing datasets.",
+        platforms: "Android and iOS", tags: ["Advanced filters", "Price alerts", "Maps"],
+        features: ["Advanced filtering across large listing datasets", "Saved and compare lists", "Price-change notifications", "Map integration and direct buyer-to-seller contact"],
+        stores: [{ links: [[GP, "https://play.google.com/store/apps/details?id=co.sakan.android&hl=en"], [AS, "https://apps.apple.com/us/app/%D8%B3%D9%83%D9%86-sakan/id1169622789"]] }] },
+      { id: "zaheb", name: "Zaheb", cat: "Ride-hailing and delivery", color: "#33D69F", screen: "ride", stat: ["Apps", "Driver and customer"],
+        summary: "Driver and customer apps with real-time location tracking, driver assignment, order management and live status updates.",
+        platforms: "Android and iOS", tags: ["Live tracking", "Driver assignment", "Two apps"],
+        features: ["Separate driver and customer flows", "Real-time location tracking", "Driver assignment and order management", "Live status updates on every order"],
+        stores: [
+          { label: "Customer app", links: [[GP, "https://play.google.com/store/apps/details?id=zaheb.client.sa&hl=en"], [AS, "https://apps.apple.com/us/app/zaheb/id6476413582"]] },
+          { label: "Driver app", links: [[GP, "https://play.google.com/store/apps/details?id=zaheb.driver.sa&hl=en"], [AS, "https://apps.apple.com/us/app/zaheb-driver/id6476413695"]] }] },
+      { id: "city-guide", name: "City Guide", cat: "City-wide services super-app", color: "#2EE6B8", screen: "city", stat: ["Model", "Multi-vendor"],
+        summary: "A multi-vendor marketplace for a whole city. Businesses showcase their products and services, and customers order and talk to vendors directly.",
+        platforms: "Android and iOS", tags: ["Multi-vendor", "Ordering", "Vendor contact"],
+        features: ["One marketplace for every business in the city", "Business profiles for products and services", "Ordering from any vendor", "Direct communication between customers and vendors"],
+        stores: [{ links: [[GP, "https://play.google.com/store/apps/details?id=ta.daleel.masr.eg&hl=en"], [AS, "https://apps.apple.com/us/app/%D8%AF%D9%84%D9%8A%D9%84-%D8%A7%D9%84%D9%85%D8%AF%D9%8A%D9%86%D8%A9/id6504849336"]] }] },
+      { id: "weideliver", name: "Weideliver", cat: "Delivery and logistics", color: "#FF6B1A", screen: "wei", stat: ["Apps", "Store and driver"],
+        summary: "A two-sided platform. Merchants manage orders and dispatch from the store app, and drivers go online, accept jobs and track weekly earnings.",
+        platforms: "Android", tags: ["Dispatch", "Driver jobs", "Weekly earnings"],
+        features: ["Store app for managing orders and dispatch", "Driver app to go online, accept jobs and track weekly earnings", "Works with a business's own fleet or an on-demand driver pool"],
+        stores: [
+          { label: "Store app", links: [[GP, "https://play.google.com/store/apps/details?id=ua.suliitstore.app.com"]] },
+          { label: "Driver app", links: [[GP, "https://play.google.com/store/apps/details?id=ua.suliitdriver.com"]] }] },
+      { id: "wafeyyat", name: "Wafeyyat", cat: "After-death services", color: "#C9B68A", screen: "waf", stat: ["Built for", "Families"],
+        summary: "Guides families through obituary creation, burial and funeral arrangements, prayers and the required documents, with services filtered by religious practice.",
+        platforms: "Android", tags: ["Guided steps", "Documents", "By religious practice"],
+        features: ["Obituary creation", "Burial and funeral arrangements", "Prayers and required documentation", "Services filtered by religious practice"],
+        stores: [{ links: [[GP, "https://play.google.com/store/apps/details?id=lbn.wafyyat.com"]] }] },
+      { id: "reserva", name: "Reserva", cat: "E-commerce", color: "#E8457C", screen: "store", stat: ["Focus", "Checkout"],
+        summary: "Store management, product catalogues, order flows, payments and vouchers, with checkout logic for discounts and wallets and solid validation and error handling.",
+        platforms: "Mobile", tags: ["Payments", "Vouchers", "Wallets"],
+        features: ["Store management and product catalogues", "Order flows and payments", "Checkout logic for vouchers, discounts and wallets", "Robust validation and error handling"],
+        stores: [] }
     ];
 
     // Floating callouts beside the phone, two per app.
     var CALLOUTS = {
-      sakan: [["100K+", "downloads"], ["iOS and Android", "from one Flutter codebase"]],
-      ride: [["Live", "driver tracking"], ["Every trip state", "request to drop-off"]],
-      delivery: [["Real time", "order tracking"], ["Checkout", "in a few taps"]],
-      city: [["Native", "Swift and Kotlin modules"], ["Push", "on every status change"]],
-      store: [["Catalogue", "cart and checkout"], ["Fast", "on lower-end Android"]],
-      seller: [["Daily", "sales charts"], ["Real time", "order updates"]]
+      sakan: [["100K+", "downloads"], ["Price alerts", "when a listing changes"]],
+      zaheb: [["2 apps", "driver and customer"], ["Live", "location tracking"]],
+      "city-guide": [["Multi-vendor", "one city, every business"], ["Direct", "customer to vendor"]],
+      weideliver: [["Own fleet", "or on-demand drivers"], ["Weekly", "driver earnings"]],
+      wafeyyat: [["Step by step", "from obituary to documents"], ["Filtered", "by religious practice"]],
+      reserva: [["Vouchers", "discounts and wallets"], ["Validated", "checkout and payments"]]
     };
 
     var JOBS = [
-      { when: "Now", title: "Mobile Team Lead", where: "Code Craft",
-        points: ["Lead the mobile team and take client scopes from planning to release", "Set architecture, state-management and code-quality standards, enforced through code review", "Mentor junior developers and run knowledge-sharing sessions", "Bring Claude, Cursor, Copilot and custom agents into the delivery cycle"] },
-      { when: "Earlier", title: "Mobile Developer", where: "Client projects in Saudi Arabia",
-        points: ["Built and shipped iOS and Android apps for clients in Saudi Arabia", "Worked across Flutter and native code, plus the Laravel and Firebase back ends behind them"] }
+      { company: "Code Craft", role: "Mobile Team Lead (Flutter)", start: "2022-01", end: null, label: "Jan 2022 to now",
+        points: ["Lead the mobile team at a delivery-focused software house, taking client scopes from planning through release",
+                 "Own project planning, code reviews and task distribution across the team",
+                 "Set and enforce standards for architecture, state management and code quality",
+                 "Guide critical modules: payments, maps, push notifications and in-app services",
+                 "Mentor junior developers and run knowledge-sharing sessions to shorten onboarding",
+                 "Work with product managers and client stakeholders to keep delivery tied to business goals"],
+        tags: ["Team lead", "Code review", "Architecture", "Payments", "Maps", "Push notifications"] },
+      { company: "Treasure Company", role: "Dubai, remote and part-time", start: "2022-01", end: "2025-07", label: "Jan 2022 to Jul 2025",
+        points: ["Implemented state management with Bloc for smooth data flow and responsive UI",
+                 "Used CI/CD pipelines and automated unit, widget and integration tests",
+                 "Reduced app size, improved load times and fixed performance issues",
+                 "Took part in sprint planning, reviews and retrospectives to hit milestones on time"],
+        tags: ["Bloc", "CI/CD", "Automated testing", "Performance", "Agile/Scrum"] },
+      { company: "Awamer El Shabaka", role: "Saudi Arabia", start: "2020-07", end: "2022-01", label: "Jul 2020 to Jan 2022",
+        points: ["Built multiple apps for customers in Saudi Arabia",
+                 "Kept the team on current Flutter releases, libraries and best practices",
+                 "Wrote and maintained documentation for internal and external stakeholders"],
+        tags: ["Flutter", "Client apps", "Documentation"] }
     ];
 
     var STACK = [
-      { name: "Mobile", title: "Cross-platform first, native when it counts.", text: "Flutter for most products, with Swift and Kotlin for the features that need the platform directly.", items: ["Flutter", "Dart", "Swift", "Kotlin", "iOS", "Android"] },
-      { name: "Back end", title: "The APIs behind the apps.", text: "Laravel for full back ends, Firebase Functions when a product needs to move fast.", items: ["Laravel", "Firebase Functions", "Firebase", "REST APIs"] },
-      { name: "AI tooling", title: "Shorter cycles, same quality bar.", text: "AI tools speed up the routine work so review time goes where it matters.", items: ["Claude", "Cursor", "GitHub Copilot", "Custom tool-calling agents"] },
-      { name: "Team practice", title: "Standards that survive a deadline.", text: "The habits that keep a team shipping clean code release after release.", items: ["Architecture standards", "State management", "Code review", "Mentoring", "Knowledge sharing"] }
+      { name: "Mobile", title: "Cross-platform first, native when it counts.", text: "Four-plus years of production Flutter apps with custom widgets, animation and pixel-perfect UI, plus Swift and Kotlin or Java for platform features and native modules.", items: ["Flutter", "Dart", "Swift", "Kotlin", "Java", "Custom widgets", "Animations"] },
+      { name: "Architecture", title: "Codebases that stay readable as they grow.", text: "Clean Architecture and MVVM across large modular codebases, with the state approach chosen per project.", items: ["Clean Architecture", "MVVM", "BLoC", "Provider", "GetX"] },
+      { name: "Back end", title: "Ships its own endpoints.", text: "Laravel and Firebase Functions on the server side, integrated over REST, GraphQL and WebSockets.", items: ["Laravel", "Firebase", "Firebase Functions", "REST", "GraphQL", "WebSockets", "AWS"] },
+      { name: "AI and agents", title: "Shorter cycles, same quality bar.", text: "Claude, Cursor and Copilot every day for features, refactoring and review, plus tool-calling agents and MCP integrations that automate delivery and internal workflows.", items: ["Claude", "Cursor", "Copilot", "Tool-calling agents", "MCP"] },
+      { name: "Quality and delivery", title: "Tested, profiled and shipped on schedule.", text: "CI/CD pipelines, automated tests at every level and performance profiling, run inside Agile/Scrum.", items: ["GitHub Actions", "Bitrise", "Unit tests", "Widget tests", "Integration tests", "Profiling", "Git", "Agile/Scrum"] }
     ];
 
     /* ---------- Phone screens ---------- */
     var SB = '<div class="sb"><span>9:41</span><b></b></div>';
+    var SCR_CLASS = { sakan: "sakan", ride: "ride", city: "city", wei: "wei", waf: "waf", store: "store" };
     var SCREENS = {
       sakan: SB + '<div class="stg"><h4>Find your next home</h4><div class="s-search">Search by area or compound</div>' +
         '<div class="chips"><span>Apartments</span><span>Villas</span><span>Offices</span></div>' +
         '<div class="home"><div class="home-img"></div><div class="home-body"><div>3-bed apartment<br><small>New Cairo</small></div><strong>EGP 3.2M</strong></div></div>' +
-        '<div class="home"><div class="home-img"></div><div class="home-body"><div>Garden villa<br><small>Sheikh Zayed</small></div><strong>EGP 8.9M</strong></div></div></div>',
+        '<div class="home"><div class="home-img"></div><div class="home-body"><div>Garden villa<br><small>Price dropped 4%</small></div><strong>EGP 8.9M</strong></div></div></div>',
       ride: '<svg class="map" viewBox="0 0 240 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">' +
         '<path class="road" d="M-10 120 H250 M-10 300 H250 M60 -10 V530 M170 -10 V530 M-10 430 L250 200"/>' +
         '<path class="route" d="M40 360 C 80 300, 60 250, 120 220 S 200 160, 190 90"/></svg>' +
         '<i class="car"></i><i class="pin"></i>' + SB.replace('class="sb"', 'class="sb" style="z-index:2"') +
-        '<div class="sheet-mini"><strong style="font-size:13px">Driver arriving in 3 min</strong>' +
+        '<div class="sheet-mini"><strong style="font-size:13px">Driver assigned, 3 min away</strong>' +
         '<div class="driver"><i></i><div>Ahmed<br><small>Toyota Corolla, white</small></div><span class="plate">ABC 1234</span></div>' +
-        '<div class="ride-btn">Share trip</div></div>',
-      delivery: SB + '<div class="stg"><h4>Your order</h4><div class="eta"><small style="opacity:.85">Arriving in</small><b>18 min</b><div class="bar" style="background:rgba(255,255,255,.3)"></div></div>' +
-        '<div class="track"><div class="tstep done"><i></i>Order confirmed</div><div class="tstep done"><i></i>Being prepared</div><div class="tstep now"><i></i>On the way</div><div class="tstep"><i></i>Delivered</div></div>' +
-        '<div class="items"><span></span><span></span><span></span></div></div>',
-      city: SB + '<div class="stg"><div><small>Good morning</small><h4>City services</h4></div>' +
-        '<div class="tiles"><div class="tile"><i></i>Permits</div><div class="tile"><i></i>Water</div><div class="tile"><i></i>Roads</div><div class="tile"><i></i>Waste</div><div class="tile"><i></i>Parks</div><div class="tile"><i></i>Parking</div></div>' +
-        '<div class="req"><small>Request #2481</small><strong>Street light repair</strong><em>In review</em></div><div class="req" style="background:rgba(255,255,255,.05)"><small>Bill</small><strong>Water, due in 5 days</strong><span style="color:#2EE6B8;font-weight:700">Pay now</span></div></div>',
-      store: SB + '<i class="cart"></i><div class="stg"><h4>Discover</h4><div class="promo"><small>This week</small><b>Up to 40% off</b></div>' +
-        '<div class="grid2"><div class="prod"><i></i>Sneakers<b>EGP 1,450</b></div><div class="prod"><i></i>Headphones<b>EGP 2,100</b></div><div class="prod"><i></i>Backpack<b>EGP 890</b></div><div class="prod"><i></i>Watch<b>EGP 3,300</b></div></div></div>',
-      seller: SB + '<div class="stg"><h4>Today</h4><div class="kpi"><small>Sales</small><b>EGP 24,860</b><em>Up 12% on yesterday</em></div>' +
-        '<div class="bars"><i style="--h:40%"></i><i style="--h:62%"></i><i style="--h:48%"></i><i style="--h:80%"></i><i style="--h:58%"></i><i style="--h:92%"></i><i style="--h:70%"></i></div>' +
-        '<div class="orders"><div><span>#1043, 2 items</span><strong>New</strong></div><div><span>#1042, 1 item</span><span>Packed</span></div><div><span>#1041, 4 items</span><span>Shipped</span></div></div></div>'
+        '<div class="ride-btn">Track live</div></div>',
+      city: SB + '<div class="stg"><div><small>Explore your city</small><h4>City Guide</h4></div>' +
+        '<div class="tiles"><div class="tile"><i></i>Food</div><div class="tile"><i></i>Pharmacy</div><div class="tile"><i></i>Grocery</div><div class="tile"><i></i>Services</div><div class="tile"><i></i>Shops</div><div class="tile"><i></i>Clinics</div></div>' +
+        '<div class="req"><small>Message from Nour Bakery</small><strong>Your order is ready for pickup</strong><em>Reply</em></div>' +
+        '<div class="req" style="background:rgba(255,255,255,.05)"><small>Order #2481</small><strong>2 items from Green Grocer</strong><span style="color:#2EE6B8;font-weight:700">On the way</span></div></div>',
+      wei: SB + '<div class="stg"><div class="online"><span><small>Driver</small><br><strong>You\'re online</strong></span><i class="tog"></i></div>' +
+        '<div class="jobcard"><small>New delivery job</small><strong>Downtown store to Gomhoreya St</strong><div class="jrow"><span>4.2 km</span><b>EGP 45</b></div><div class="ride-btn">Accept job</div></div>' +
+        '<div class="wk"><small>This week</small><b>EGP 3,420</b></div>' +
+        '<div class="bars"><i style="--h:40%"></i><i style="--h:62%"></i><i style="--h:48%"></i><i style="--h:80%"></i><i style="--h:58%"></i><i style="--h:92%"></i><i style="--h:70%"></i></div></div>',
+      waf: SB + '<div class="stg"><div><small>Family guide</small><h4>Arrangements</h4></div>' +
+        '<div class="track"><div class="tstep done"><i></i>Obituary</div><div class="tstep done"><i></i>Burial</div><div class="tstep now"><i></i>Funeral</div><div class="tstep"><i></i>Prayers</div><div class="tstep"><i></i>Documents</div></div>' +
+        '<div class="docs"><small>Required documents</small><strong>3 of 5 ready</strong><div class="bar"></div></div></div>',
+      store: SB + '<i class="cart"></i><div class="stg"><h4>Discover</h4><div class="promo"><small>Voucher SAVE20 applied</small><b>20% off your order</b></div>' +
+        '<div class="grid2"><div class="prod"><i></i>Sneakers<b>EGP 1,450</b></div><div class="prod"><i></i>Headphones<b>EGP 2,100</b></div><div class="prod"><i></i>Backpack<b>EGP 890</b></div><div class="prod"><i></i>Watch<b>EGP 3,300</b></div></div>' +
+        '<div class="wallet"><span>Wallet balance</span><b>EGP 640</b></div></div>'
     };
+
+    var ICON_EXT = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>';
+    function storeLinks(a, compact) {
+      if (!a.stores.length) return "";
+      if (compact) {
+        var g = a.stores[0];
+        return g.links.map(function (l) { return '<a class="store-pill" href="' + l[1] + '" target="_blank" rel="noopener" tabindex="-1">' + l[0] + ICON_EXT + '</a>'; }).join("");
+      }
+      return a.stores.map(function (g) {
+        return '<div class="store-group">' + (g.label ? '<p>' + g.label + '</p>' : '') + '<div class="store-row">' +
+          g.links.map(function (l) { return '<a class="store-btn" href="' + l[1] + '" target="_blank" rel="noopener"><span><small>Get it on</small>' + l[0] + '</span>' + ICON_EXT + '</a>'; }).join("") + '</div></div>';
+      }).join("");
+    }
 
     /* ---------- Build story ---------- */
     var story = $("#story"), texts = $("#story-texts"), screen = $("#phone-screen"), index = $("#story-index"), phone = $("#phone"), device = $("#device"), callBox = $("#callouts");
@@ -997,10 +1150,10 @@
       var t = document.createElement("article");
       t.className = "story-text"; t.dataset.i = i;
       t.innerHTML = '<p class="story-cat">' + a.cat + '</p><h3>' + a.name + '</h3><p>' + a.summary + '</p>' +
-        '<div class="story-tags">' + a.stack.map(function (s) { return '<span class="tag">' + s + '</span>'; }).join("") + '</div>' +
-        '<button class="btn btn--line" type="button" data-open="' + a.id + '" tabindex="-1">Open the case study</button>';
+        '<div class="story-tags">' + a.tags.map(function (s) { return '<span class="tag">' + s + '</span>'; }).join("") + '</div>' +
+        '<div class="story-actions"><button class="btn btn--line" type="button" data-open="' + a.id + '" tabindex="-1">Open the case study</button>' + storeLinks(a, true) + '</div>';
       texts.appendChild(t);
-      var s = document.createElement("div"); s.className = "scr s-" + ({ sakan: "sakan", ride: "ride", delivery: "del", city: "city", store: "store", seller: "sell" })[a.screen];
+      var s = document.createElement("div"); s.className = "scr s-" + SCR_CLASS[a.screen];
       s.innerHTML = SCREENS[a.screen]; screen.appendChild(s);
       var b = document.createElement("button"); b.type = "button"; b.innerHTML = a.name + "<i></i>";
       b.addEventListener("click", function () { scrollToStep(i); }); index.appendChild(b);
@@ -1011,7 +1164,7 @@
     var current = -1;
     function setStep(i) {
       if (i === current) return; var first = current === -1; current = i;
-      stepEls.forEach(function (el, k) { var on = k === i; el.classList.toggle("is-active", on); $("button", el).tabIndex = on ? 0 : -1; });
+      stepEls.forEach(function (el, k) { var on = k === i; el.classList.toggle("is-active", on); $$("button, a", el).forEach(function (f) { f.tabIndex = on ? 0 : -1; }); });
       scrEls.forEach(function (el, k) { el.classList.toggle("is-active", k === i); });
       idxEls.forEach(function (el, k) { el.classList.toggle("is-active", k === i); });
       dotEls.forEach(function (el, k) { el.classList.toggle("is-active", k === i); });
@@ -1035,10 +1188,18 @@
 
     /* ---------- Timeline ---------- */
     var tl = $("#timeline");
+    function span(start, end) {
+      var a = start.split("-"), b = end ? end.split("-") : [new Date().getFullYear(), new Date().getMonth() + 1];
+      var m = (+b[0] - +a[0]) * 12 + (+b[1] - +a[1]), y = Math.floor(m / 12), r = m % 12;
+      return (y ? y + (y === 1 ? " yr" : " yrs") : "") + (y && r ? " " : "") + (r ? r + (r === 1 ? " mo" : " mos") : "");
+    }
     JOBS.forEach(function (j) {
-      var d = document.createElement("article"); d.className = "job reveal";
-      d.innerHTML = '<p class="job-when">' + j.when + '</p><h3>' + j.title + '</h3><p class="job-where">' + j.where + '</p><ul>' +
-        j.points.map(function (p) { return "<li>" + p + "</li>"; }).join("") + "</ul>";
+      var d = document.createElement("article"); d.className = "job reveal" + (j.end ? "" : " is-current");
+      d.innerHTML = '<div class="job-top"><div><h3>' + j.company + '</h3><p class="job-where">' + j.role + '</p></div>' +
+        (j.end ? '' : '<span class="live">Current</span>') + '</div>' +
+        '<p class="job-when"><span>' + j.label + '</span><span>' + span(j.start, j.end) + '</span></p><ul>' +
+        j.points.map(function (p) { return "<li>" + p + "</li>"; }).join("") + "</ul>" +
+        '<div class="job-tags">' + j.tags.map(function (t) { return '<span class="tag">' + t + '</span>'; }).join("") + '</div>';
       tl.appendChild(d);
     });
 
@@ -1219,13 +1380,14 @@
     /* ---------- Case study sheet ---------- */
     var sroot = $("#sheet-root"), sbody = $("#sheet-body"), sheet = $(".sheet", sroot), openIdx = -1, lastFocus = null;
     function renderSheet(i) {
-      var a = APPS[i], sc = { sakan: "sakan", ride: "ride", delivery: "del", city: "city", store: "store", seller: "sell" }[a.screen];
+      var a = APPS[i], sc = SCR_CLASS[a.screen];
+      sbody.style.setProperty("--c", a.color);
       sbody.innerHTML = '<div class="cs-hero" style="--c:' + a.color + '"><div><span>' + a.cat + '</span><h2 id="sheet-title">' + a.name + '</h2></div>' +
         '<div class="phone cs-phone" aria-hidden="true" style="--w:158px;--glow:' + a.color + '"><span class="phone-island"></span><div class="phone-screen"><div class="scr is-active s-' + sc + '">' + SCREENS[a.screen] + '</div></div></div></div>' +
         '<div class="cs-content"><p>' + a.summary + '</p>' +
-        '<dl class="cs-meta"><div><dt>Role</dt><dd>' + a.role + '</dd></div><div><dt>Platforms</dt><dd>' + a.platforms + '</dd></div></dl>' +
-        '<div><h3>What I did</h3><ul class="did">' + a.did.map(function (d) { return "<li>" + d + "</li>"; }).join("") + '</ul></div>' +
-        '<div><h3>Built with</h3><div class="story-tags">' + a.stack.map(function (s) { return '<span class="tag">' + s + '</span>'; }).join("") + '</div></div></div>';
+        '<dl class="cs-meta"><div><dt>Platforms</dt><dd>' + a.platforms + '</dd></div><div><dt>' + a.stat[0] + '</dt><dd>' + a.stat[1] + '</dd></div></dl>' +
+        (a.stores.length ? '<div class="cs-stores"><h3>Get the app</h3>' + storeLinks(a) + '</div>' : '') +
+        '<div><h3>What it does</h3><ul class="did">' + a.features.map(function (d) { return "<li>" + d + "</li>"; }).join("") + '</ul></div></div>';
       sbody.scrollTop = 0;
     }
     function openSheet(i, push) {
