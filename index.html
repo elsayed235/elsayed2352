@@ -737,13 +737,17 @@
       .job-top { flex-direction: column-reverse; gap: 12px; }
       .timeline { padding-left: 26px; }
       .job::before { left: -26px; }
-      .timeline::before, .timeline-fill { left: 2px; }
       .portrait { max-width: none; aspect-ratio: 4 / 5; }
       .portrait img { object-position: 50% 30%; }
       .cs-hero { height: 290px; }
       .store-btn { flex-basis: 140px; }
     }
     @media (max-width: 380px) { .nav .logo-name { display: none; } }
+
+    /* Touch: the story stops on each app instead of flying past */
+    html.snap-on { scroll-snap-type: y mandatory; scroll-padding-top: 0; }
+    .snap-pt { position: absolute; left: 0; width: 1px; height: 1px; pointer-events: none; visibility: hidden; scroll-snap-align: start; scroll-snap-stop: always; }
+    html.snap-on .specs { scroll-snap-align: start; }
 
     @media (max-width: 1000px) { .callouts { display: none; } }
     @media (max-width: 680px) {
@@ -1013,7 +1017,14 @@
     var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
     var EMAIL = "elsaed3766@gmail.com";
     var lenis = null;
-    function goTo(y) { if (lenis) lenis.scrollTo(y, { duration: 1.5 }); else window.scrollTo({ top: y, behavior: reduce ? "auto" : "smooth" }); }
+    var coarse = matchMedia("(pointer: coarse)").matches, navigating = false, navTimer;
+    function goTo(y) {
+      if (lenis) { lenis.scrollTo(y, { duration: 1.5 }); return; }
+      // Programmatic jumps (menu links, back to top) skip the story snapping.
+      navigating = true; document.documentElement.classList.remove("snap-on"); clearTimeout(navTimer);
+      navTimer = setTimeout(function () { navigating = false; }, 1400);
+      window.scrollTo({ top: y, behavior: reduce ? "auto" : "smooth" });
+    }
 
     /* ============================================================
        CONTENT, taken from the CV. Store links open the app's page
@@ -1318,6 +1329,8 @@
       }
       // Story
       var r = storyRange(), p = Math.min(1, Math.max(0, (y - r.top) / r.len)), n = APPS.length;
+      if (coarse && !navigating) touchStory(y, r);
+      lastY = y;
       setStep(Math.min(n - 1, Math.floor(p * n)));
       idxEls.forEach(function (el, k) { el.style.setProperty("--fill", Math.min(1, Math.max(0, p * n - k))); });
       phone.style.setProperty("--py", ((p - .5) * -30).toFixed(1) + "px");
@@ -1332,6 +1345,33 @@
       var cur = -1; sections.forEach(function (s, k) { if (s && s.getBoundingClientRect().top < vh * .45) cur = k; });
       navLinks.forEach(function (a, k) { a.classList.toggle("is-current", k === cur); });
     }
+    /* Touch: a fast flick can't skip the apps. Entering the story stops the fling at
+       the first app, then each app is a snap point that a single swipe can't pass. */
+    var snapPts = [], lastY = window.scrollY, html = document.documentElement;
+    function placeSnapPoints() {
+      snapPts.forEach(function (el) { el.remove(); }); snapPts = [];
+      if (!coarse) return;
+      var len = story.offsetHeight - window.innerHeight, n = APPS.length;
+      for (var i = 0; i < n; i++) {
+        var el = document.createElement("i"); el.className = "snap-pt"; el.setAttribute("aria-hidden", "true");
+        el.style.top = Math.round(i === 0 ? 0 : len * (i + .5) / n) + "px";
+        story.appendChild(el); snapPts.push(el);
+      }
+    }
+    function catchAt(t) {
+      // Briefly freezing overflow kills the momentum on Android and iOS, then we land on the target.
+      html.style.overflow = "hidden"; window.scrollTo(0, t);
+      setTimeout(function () { html.style.overflow = ""; window.scrollTo(0, t); }, 50);
+    }
+    function touchStory(y, r) {
+      var vh = window.innerHeight, rect = story.getBoundingClientRect(), endY = r.top + r.len, n = APPS.length;
+      html.classList.toggle("snap-on", rect.top <= vh * .5 && rect.bottom > vh * .5);
+      if (lastY < r.top - 2 && y > r.top + 2 && y < endY) catchAt(r.top);
+      else if (lastY > endY + 2 && y < endY - 2 && y > r.top) catchAt(Math.round(r.top + r.len * (n - .5) / n));
+    }
+    placeSnapPoints();
+    window.addEventListener("resize", placeSnapPoints);
+
     function requestTick() { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }
     window.addEventListener("scroll", requestTick, { passive: true });
     window.addEventListener("resize", function () { sizeCanvas(); draw(performance.now()); requestTick(); });
@@ -1446,7 +1486,7 @@
     });
 
     /* Smooth inertial scroll */
-    if (!reduce && window.Lenis) {
+    if (!reduce && window.Lenis && !coarse) {
       try {
         lenis = new Lenis({ lerp: .085, smoothWheel: true });
         lenis.on("scroll", requestTick);
