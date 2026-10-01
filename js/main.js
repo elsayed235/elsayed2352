@@ -216,8 +216,11 @@
         const items = (a.platforms || []).map((pl) => {
           const url = pl === "Android" ? a.android : a.ios;
           const store = pl === "Android" ? "Google Play" : "App Store";
+          const ico = pl === "Android"
+            ? '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M5 3.2v17.6c0 .5.5.8.9.6L21 13c.5-.3.5-1 0-1.3L5.9 2.6c-.4-.2-.9.1-.9.6z"/></svg>'
+            : '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 4 6 15M12 4l6 11M4 15h16M9.5 19l1-2"/></svg>';
           return url
-            ? `<a class="btn btn--ink store-btn" href="${esc(url)}" target="_blank" rel="noopener">Get it on ${store}</a>`
+            ? `<a class="btn btn--ink store-btn" href="${esc(url)}" target="_blank" rel="noopener" aria-label="${esc(a.label)} on ${store}">${ico}${store}<svg class="ext" viewBox="0 0 20 20" width="12" height="12" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h9v9M16 4 5 15"/></svg></a>`
             : `<span class="platform">${pl}</span>`;
         });
         return `<div class="store-row"><span class="store-label">${esc(a.label)}</span>${items.join("")}</div>`;

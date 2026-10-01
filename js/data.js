@@ -10,7 +10,7 @@ window.SITE = {
     phone: "+20 106 023 9912",
     whatsapp: "https://wa.me/201060239912",
     github: "https://github.com/elsayed235",
-    linkedin: "https://www.linkedin.com/in/elsayed-abd-elmonem-arab",
+    linkedin: "https://www.linkedin.com/in/elsayed-abd-elmonem-arab/",
     cv: "assets/Elsayed_Abdelmoneem_CV.pdf",
     // Put your photo in assets/ and set its path here, e.g. "assets/profile.jpg".
     // Leave empty to show the EA monogram instead.
@@ -37,7 +37,9 @@ window.SITE = {
       metric: "100K+ downloads",
       summary:
         "Property search with advanced filtering, saved and compare lists, price-change alerts, map browsing, and direct buyer-to-seller contact.",
-      apps: [{ label: "Sakan", platforms: ["Android", "iOS"], android: "", ios: "" }],
+      apps: [{ label: "Sakan", platforms: ["Android", "iOS"],
+          android: "https://play.google.com/store/apps/details?id=co.sakan.android",
+          ios: "https://apps.apple.com/us/app/%D8%B3%D9%83%D9%86-sakan/id1169622789" }],
       features: [
         ["Advanced filtering", "Search listings by area, price, property type and size, and refine results without starting over."],
         ["Saved and compare lists", "Shortlist properties and compare them side by side before reaching out."],
@@ -59,8 +61,12 @@ window.SITE = {
       summary:
         "Two apps on one system: customers request rides and deliveries, drivers get assigned, and both sides follow every status change live.",
       apps: [
-        { label: "Driver app", platforms: ["Android", "iOS"], android: "", ios: "" },
-        { label: "Customer app", platforms: ["Android", "iOS"], android: "", ios: "" },
+        { label: "Driver app", platforms: ["Android", "iOS"],
+          android: "https://play.google.com/store/apps/details?id=zaheb.driver.sa",
+          ios: "https://apps.apple.com/us/app/zaheb-driver/id6476413695" },
+        { label: "Customer app", platforms: ["Android", "iOS"],
+          android: "https://play.google.com/store/apps/details?id=zaheb.client.sa",
+          ios: "https://apps.apple.com/us/app/zaheb/id6476413582" },
       ],
       features: [
         ["Real-time location tracking", "Customers watch their driver approach on the map, second by second."],
@@ -81,7 +87,9 @@ window.SITE = {
       metric: "Multi-vendor marketplace",
       summary:
         "A marketplace connecting an entire city: businesses showcase their products and services, and customers order and talk to vendors directly.",
-      apps: [{ label: "City Guide", platforms: ["Android", "iOS"], android: "", ios: "" }],
+      apps: [{ label: "City Guide", platforms: ["Android", "iOS"],
+          android: "https://play.google.com/store/apps/details?id=ta.daleel.masr.eg",
+          ios: "https://apps.apple.com/us/app/%D8%AF%D9%84%D9%8A%D9%84-%D8%A7%D9%84%D9%85%D8%AF%D9%8A%D9%86%D8%A9/id6504849336" }],
       features: [
         ["Vendor storefronts", "Every business gets its own page for products and services."],
         ["Ordering", "Customers order from any vendor in the city from one app."],
@@ -102,8 +110,10 @@ window.SITE = {
       summary:
         "A two-sided platform: merchants manage orders and dispatch from the store app, while drivers go online, accept jobs and track weekly earnings.",
       apps: [
-        { label: "Store app", platforms: ["Android"], android: "", ios: "" },
-        { label: "Driver app", platforms: ["Android"], android: "", ios: "" },
+        { label: "Store app", platforms: ["Android"],
+          android: "https://play.google.com/store/apps/details?id=ua.suliitstore.app.com", ios: "" },
+        { label: "Driver app", platforms: ["Android"],
+          android: "https://play.google.com/store/apps/details?id=ua.suliitdriver.com", ios: "" },
       ],
       features: [
         ["Store dispatch", "Merchants manage incoming orders and dispatch them from one screen."],
@@ -124,7 +134,8 @@ window.SITE = {
       metric: "Guided arrangements",
       summary:
         "Guides families through obituary creation, burial and funeral arrangements, prayers and required documentation, with services filtered by religious practice.",
-      apps: [{ label: "Wafeyyat", platforms: ["Android"], android: "", ios: "" }],
+      apps: [{ label: "Wafeyyat", platforms: ["Android"],
+          android: "https://play.google.com/store/apps/details?id=lbn.wafyyat.com", ios: "" }],
       features: [
         ["Obituary creation", "Families write and share an obituary in a few calm steps."],
         ["Burial and funeral arrangements", "Find and arrange the services needed, in one place."],

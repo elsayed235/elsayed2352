@@ -9,13 +9,13 @@ Static site. No build step, no dependencies. Works on GitHub Pages as-is.
 3. Repo **Settings → Pages → Build and deployment**: Source = *Deploy from a branch*, Branch = `main`, folder = `/ (root)`.
 4. After a minute the site is live at `https://elsayed235.github.io`.
 
-Any other repo name also works; the address becomes `https://elsayed235.github.io/<repo-name>/`.
+Any other repo name also works; the address becomes `https://elsayed235.github.io/<repo-name>/` (this site: `elsayed2352`).
 
 ## After it's live
 
-- In `index.html`, replace both `SITE_URL` placeholders with your live address so LinkedIn/WhatsApp link previews show `assets/og-image.png`.
-- Add your photo: put it in `assets/` and set `photo: "assets/profile.jpg"` in `js/data.js`.
-- Add store links: fill the `android` / `ios` fields for each app in `js/data.js`. Empty links show as plain labels.
+- Link previews are set up for `https://elsayed235.github.io/elsayed2352/`. If your address is different, replace it in the `<head>` of `index.html` (canonical, og:url, og:image, og:image:secure_url, twitter:image).
+- WhatsApp caches previews per link. If an old/empty preview shows, test with `https://elsayed235.github.io/elsayed2352/?v=2`.
+- Store links live in `js/data.js` (`android` / `ios` per app). Empty links show as plain labels.
 
 ## Where things live
 

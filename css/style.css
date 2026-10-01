@@ -145,6 +145,9 @@ button { font: inherit; color: inherit; }
   background: var(--signal); color: var(--signal-ink);
   font-weight: 850; font-stretch: 125%; font-size: 15px; letter-spacing: -0.02em; text-decoration: none;
 }
+.logo--photo { overflow: hidden; padding: 0; box-shadow: 0 0 0 2px var(--signal); transition: transform .25s var(--ease), box-shadow .25s; }
+.logo--photo img { width: 100%; height: 100%; object-fit: cover; }
+.logo--photo:hover { transform: scale(1.06); box-shadow: 0 0 0 3px var(--signal); }
 .nav-links { display: flex; gap: 6px; }
 .nav-links a {
   position: relative; padding: 8px 14px; border-radius: 999px;
@@ -545,7 +548,9 @@ button { font: inherit; color: inherit; }
 .cs-stores { display: grid; gap: 10px; }
 .store-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .store-label { min-width: 120px; font-size: 14px; font-weight: 650; }
-.store-btn { height: 38px; padding: 0 16px; font-size: 14px; }
+.store-btn { height: 40px; padding: 0 16px; font-size: 14px; gap: 8px; }
+.store-btn .ext { opacity: .6; transition: transform .2s var(--ease), opacity .2s; }
+.store-btn:hover .ext { opacity: 1; transform: translate(2px, -2px); }
 .platform { display: inline-flex; align-items: center; height: 34px; padding: 0 14px; border-radius: 999px; font-size: 14px; font-weight: 600; box-shadow: inset 0 0 0 1.5px var(--line); color: var(--ink-2); }
 .cs-h { margin: 46px 0 18px; font-size: 24px; font-weight: 780; font-stretch: 108%; letter-spacing: -0.01em; }
 .cs-features { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 28px; }
